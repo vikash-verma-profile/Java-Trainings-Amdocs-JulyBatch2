@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 public class UserResources {
 	@Autowired
 	private UserDaoService service;
+
 	
 	@GetMapping("users")
 	public List<User> retriveAllUsers(){
@@ -18,8 +19,13 @@ public class UserResources {
 	public User retriveUser(@PathVariable int id){
 		return service.findOne(id);
 	}
-	@PostMapping("users")
+	//@PostMapping("users")
+	@RequestMapping(method=RequestMethod.POST,path="users")
 	public User saveUser(@RequestBody User user){
+		return service.save(user);
+	}
+	@PutMapping("users")
+	public User updateUser(@RequestBody User user){
 		return service.save(user);
 	}
 }
